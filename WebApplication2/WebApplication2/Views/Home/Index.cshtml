@@ -1,0 +1,65 @@
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+
+<div class="container">
+
+
+
+    <table class="table table-responsive table-striped">
+
+
+        <thead>
+
+            <tr>
+
+                <th>ID </th>
+                <th>NAME</th>
+                <th>EMAIL</th>
+                <th>ADDRESS</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="ListData"></tbody>
+
+
+    </table>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        GetData();
+
+
+
+        function GetData() {
+
+            var html = '';
+
+            $.ajax({
+
+
+                type: 'GET',
+                url: '/Home/getAllEmployee',
+                success: function (response) {
+                    $.each(response, function (key, item) {
+                        html += "<tr><td> " + item.emp_id + "<td> <td> " + item.emp_name + "</td><td>" + item.emp_email + "</td><td>" + item.emp_address + "</td></tr>";
+
+                    });
+                    $("#ListData").append(html);
+
+                }
+
+            });
+
+        }
+        });
+        
+        
+
+</script>
